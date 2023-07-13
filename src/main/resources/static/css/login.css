@@ -1,0 +1,24 @@
+html {
+    height: 100%;
+}
+
+.login-wrap{
+    height: 100%;
+}
+
+.logo-wrap img {
+    margin-bottom: 12px;
+}
+
+.login-wrap section {
+    margin: 250px auto 354px;
+    width: 400px;
+}
+
+.member-btn-wrap{
+    display: flex;
+    justify-content: right;
+}
+.login-btn{
+    margin-left: 10px;
+}

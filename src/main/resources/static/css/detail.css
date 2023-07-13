@@ -1,0 +1,44 @@
+.detail-wrap{
+    width: 900px;
+    margin: 0 auto;
+}
+
+.detail-wrap div {
+    padding-left: 10px;
+}
+.post-btn-wrap{
+    text-align: right;
+}
+
+.form-control{
+    overflow-y: auto;
+    margin-top: 8px;
+    padding: 10px;
+}
+
+.last-content{
+    height: 400px;
+}
+
+.form-control pre{
+    font-size: 16px;
+    font-family: Noto Sans;
+}
+.btn-wrap{
+    display: flex;
+    margin-bottom: 50px;
+    justify-content: right;
+}
+
+.modify-btn-wrap{
+    margin-right: 0px;
+}
+.file-wrap{
+    padding-left: 0px !important;
+}
+
+.file-wrap svg {
+    position: relative;
+    top: -3px;
+    right: -1px;
+}

@@ -1,0 +1,129 @@
+.header {
+  width: 1080px;
+  margin: 0 auto;
+}
+
+.header-wrap {
+  position: relative;
+  margin-top: 20px;
+  width: 1080px;
+  display: flex;
+  justify-content: space-between;
+  margin-right: 10px;
+}
+
+.header-wrap div {
+  height: 50px;
+  text-align: right;
+  position: relative;
+  top: 20px;
+  right: 10px;
+  font-size: 12px;
+}
+
+.main-logo img {
+  position: absolute;
+  top: -15px;
+}
+
+.banner {
+  width: 1080px;
+  margin: 20px auto 60px;
+}
+
+.logo {
+  width: 700px;
+}
+
+.login {
+  width: 100px;
+}
+
+.content-box {
+  justify-content: space-between;
+  display: flex;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+}
+
+.writer-wrap {
+  display: flex;
+  padding: 10px;
+}
+
+.writer-wrap div {
+  font-size: 12px;
+  padding-top: 2px;
+}
+
+.box {
+  background-color: aqua;
+  width: 41px;
+  height: 41px;
+}
+
+.title {
+  width: 940px;
+  padding: 10px 12px;
+  font-weight: 400;
+}
+
+.content-wrap {
+  width: 1080px;
+  margin: 0 auto;
+}
+
+.writer{
+  padding-right: 10px;
+}
+
+.register-time {
+  text-align: center;
+  width: 60px;
+  padding-left: 10px;
+}
+
+.writer-wrap span{
+  border-left: 1px solid #eee;
+}
+
+.post-list,
+.post-total {
+  font-weight: 500;
+  font-size: 12px;
+  color: #7b7676;
+  margin-bottom: 3px;
+}
+
+.content-top {
+  width: 1080px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.post-btn-wrap {
+  margin-right: 10px;
+}
+
+.btn {
+  margin-bottom: 10px;
+  font-size: 12px;
+}
+
+.pagination {
+  margin: 50px 0 50px;
+  justify-content: center;
+
+}
+
+.header-right-wrap{
+  display: flex;
+}
+.login{
+  width: 50px;
+}
+
+.header-wrap span{
+  position: relative;
+  top: 20px;
+}
