@@ -23,13 +23,15 @@ public class PostController {
 
     @GetMapping("/list")
     public void goToList(Model model, Integer page) {
-        if(page == null){ page=0;}
+        if(page==null){page=0;}
         JSONArray jsonArray = new JSONArray();
         PageRequest pageRequest = PageRequest.of(page, 10, Sort.by(Sort.Direction.DESC, "id"));
         Page<Post> fountPages = postRepository.findAll(pageRequest);
         fountPages.get().map(post -> new JSONObject(post)).forEach(jsonArray::put);
         model.addAttribute("posts", jsonArray);
-        model.
+        model.addAttribute("prev", fountPages.hasPrevious());
+        model.addAttribute("next", fountPages.hasNext());
+
     }
 
 }

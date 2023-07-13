@@ -29,11 +29,11 @@
                 <div class="post-btn-wrap"><button type="button" class="btn btn-primary">게시글 등록</button></div>
             </div>
             <ul class="content-ul"></ul>
-<%--            <nav aria-label="Page navigation example">--%>
-<%--                <ul class="pagination">--%>
-<%--                <c:if test="${pagination.prev}">--%>
-<%--                    <li class="page-item"><a class="page-link" href="/posts/list?page=${pagination.startPage-1}"><</a></li>--%>
-<%--                </c:if>--%>
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                <c:if test="${prev}">
+                    <li class="page-item"><a class="page-link" href="/posts/list?page=${pagination.startPage-1}"><</a></li>
+                </c:if>
 <%--                <c:forEach var="i" begin="${pagination.startPage}" end="${pagination.endPage}">--%>
 <%--                    <c:choose>--%>
 <%--                        <c:when test="${i eq pagination.page}">--%>
@@ -47,8 +47,8 @@
 <%--                <c:if test="${pagination.next}">--%>
 <%--                    <li class="page-item"><a class="page-link" href="/posts/list?page=${pagination.endPage+1}">></a></li>--%>
 <%--                </c:if>--%>
-<%--                </ul>--%>
-<%--            </nav>--%>
+                </ul>
+            </nav>
         </div>
     </section>
 </div>
@@ -56,6 +56,8 @@
 <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 <script>
     let posts = ${posts};
+    let prev = ${prev};
+    console.log(prev);
     let id = [${sessionScope.id}];
 </script>
 <script src="/js/elapsedTime.js"></script>
