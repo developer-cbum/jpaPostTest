@@ -24,7 +24,7 @@
             <div class="content-top">
                 <div>
                     <div class="post-list">게시글 목록</div>
-<%--                    <div class="post-total"><c:out value="${pagination.total}개"/></div>--%>
+                    <div class="post-total"><c:out value="${pagination.total}개"/></div>
                 </div>
                 <div class="post-btn-wrap"><button type="button" class="btn btn-primary">게시글 등록</button></div>
             </div>
@@ -56,7 +56,9 @@
 <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 <script>
     let posts = ${posts};
+
     let id = [${sessionScope.id}];
+    console.log(id);
 </script>
 <script src="/js/elapsedTime.js"></script>
 <script src="/js/list.js"></script>

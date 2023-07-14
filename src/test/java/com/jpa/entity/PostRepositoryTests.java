@@ -34,6 +34,11 @@ public class PostRepositoryTests {
         }
     }
 
+    @Test
+    public void findMemberAndPostTest(){
+        log.info(postRepository.findAll().toString());
+    }
+
 
     @Test
     public void findByIdTest(){
@@ -44,6 +49,7 @@ public class PostRepositoryTests {
     public void findAllTest(){
         PageRequest pageRequest = PageRequest.of(0, 10, Sort.by(Sort.Direction.DESC, "id"));
         final Page<Post> pagingOfPost = postRepository.findAll(pageRequest);
+        pagingOfPost.getContent().get(0).getMember();
         pagingOfPost.get().forEach(post -> log.info(post.toString()));
 
     }

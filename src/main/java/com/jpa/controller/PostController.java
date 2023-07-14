@@ -1,10 +1,18 @@
 package com.jpa.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.jpa.entity.Member;
 import com.jpa.entity.Post;
 import com.jpa.entity.dto.Pagination;
+import com.jpa.repository.MemberRepository;
 import com.jpa.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.tomcat.util.json.JSONParser;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.data.domain.Page;
@@ -20,6 +28,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.view.RedirectView;
 
+import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 import java.util.Optional;
 
@@ -30,20 +39,24 @@ import java.util.Optional;
 public class PostController {
 
     private final PostRepository postRepository;
+    private final MemberRepository memberRepository;
 
 
     @GetMapping("/list")
     public void goToList(Model model, Pagination pagination) {
+        JSONArray jsonArray= new JSONArray();
         // Pagination + 기존 page랑 합쳐서 사용
         pagination.setRowCount(10);
         pagination.setTotal((int)postRepository.count());
         pagination.progress();
         PageRequest pageRequest = PageRequest.of(pagination.getPage(), 10, Sort.by(Sort.Direction.DESC, "id"));
-        JSONArray jsonArray = new JSONArray();
         Page<Post> fountPages = postRepository.findAll(pageRequest);
 
+
         fountPages.getContent().stream().map(post -> new JSONObject(post)).forEach(jsonArray::put);
-        model.addAttribute("posts", jsonArray);
+
+
+//        model.addAttribute("posts", jsonArray);
         model.addAttribute("pagination", pagination);
 
     }
@@ -53,8 +66,14 @@ public class PostController {
     public void goToWrite(){;}
 
     @PostMapping("/write")
-    public RedirectView write(Post post){
-        postRepository.save(post);
+    public RedirectView write(Post post, HttpSession session){
+        if(session.getAttribute("id") != null){
+            Optional<Member> foundMember = memberRepository.findById((Long) (session.getAttribute("id")));
+            if(foundMember.isPresent()){
+                post.setMember(foundMember.get());
+            }
+            postRepository.save(post);
+        };
         return new RedirectView("/posts/list");
     }
 
