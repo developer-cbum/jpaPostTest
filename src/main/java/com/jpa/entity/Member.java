@@ -1,6 +1,5 @@
 package com.jpa.entity;
 
-import com.jpa.auditing.Period;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,18 +12,16 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Getter @Setter @ToString
-@Table(name= "tbl_post")
-@SQLDelete(sql ="update tbl_post set deleted = 1 where id = ?")
+@Table(name = "tbl_member")
+@SQLDelete(sql ="update tbl_member set deleted = 1 where id = ?")
 @Where(clause = "deleted = 0")
-public class Post extends Period {
-    @Id @GeneratedValue
+public class Member {
+    @Id
+    @GeneratedValue
     @EqualsAndHashCode.Include
     private Long id;
-    @NotNull private String postTitle;
-    @NotNull private String postContent;
+    @NotNull private String memberName;
+    @Column(unique = true) @NotNull private String memberEmail;
+    @NotNull private String memberPassword;
     @NotNull boolean deleted = Boolean.FALSE;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Member member;
-
 }

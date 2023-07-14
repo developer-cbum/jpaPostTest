@@ -8,10 +8,10 @@ $(document).ready(function () {
 
     //게시글 등록버튼 클릭 이벤트
     registerBtn.on("click", () => {
-        if (id.length == 0) {
-            alert("로그인 후 이용해주세요");
-            return;
-        }
+        // if (id.length == 0) {
+        //     alert("로그인 후 이용해주세요");
+        //     return;
+        // }
         location.href = `/posts/write`
     })
 

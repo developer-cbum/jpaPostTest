@@ -31,22 +31,22 @@
             <ul class="content-ul"></ul>
             <nav aria-label="Page navigation example">
                 <ul class="pagination">
-                <c:if test="${prev}">
+                <c:if test="${pagination.prev}">
                     <li class="page-item"><a class="page-link" href="/posts/list?page=${pagination.startPage-1}"><</a></li>
                 </c:if>
-<%--                <c:forEach var="i" begin="${pagination.startPage}" end="${pagination.endPage}">--%>
-<%--                    <c:choose>--%>
-<%--                        <c:when test="${i eq pagination.page}">--%>
-<%--                            <li class="page-item active"><a class="page-link"><c:out value="${i}"/></a></li>--%>
-<%--                        </c:when>--%>
-<%--                        <c:otherwise>--%>
-<%--                            <li class="page-item"><a class="page-link" href="/posts/list?page=${i}"><c:out value="${i}"/></a></li>--%>
-<%--                        </c:otherwise>--%>
-<%--                    </c:choose>--%>
-<%--                </c:forEach>--%>
-<%--                <c:if test="${pagination.next}">--%>
-<%--                    <li class="page-item"><a class="page-link" href="/posts/list?page=${pagination.endPage+1}">></a></li>--%>
-<%--                </c:if>--%>
+                <c:forEach var="i" begin="${pagination.startPage}" end="${pagination.endPage}">
+                    <c:choose>
+                        <c:when test="${i eq pagination.page+1}">
+                            <li class="page-item active"><a class="page-link"><c:out value="${i}"/></a></li>
+                        </c:when>
+                        <c:otherwise>
+                            <li class="page-item"><a class="page-link" href="/posts/list?page=${i}"><c:out value="${i}"/></a></li>
+                        </c:otherwise>
+                    </c:choose>
+                </c:forEach>
+                <c:if test="${pagination.next}">
+                    <li class="page-item"><a class="page-link" href="/posts/list?page=${pagination.endPage+1}">></a></li>
+                </c:if>
                 </ul>
             </nav>
         </div>
@@ -56,8 +56,6 @@
 <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 <script>
     let posts = ${posts};
-    let prev = ${prev};
-    console.log(prev);
     let id = [${sessionScope.id}];
 </script>
 <script src="/js/elapsedTime.js"></script>
