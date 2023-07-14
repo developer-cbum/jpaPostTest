@@ -74,10 +74,7 @@ public class PostController {
     @Transactional
     @PostMapping("/modify/{id}")
     public RedirectView modify(@PathVariable Long id, Post post){
-        Optional<Post> foundPost = postRepository.findById(id);
-        foundPost.ifPresent(basicPost -> {
-            postRepository.updatePost(post.getPostTitle(), post.getPostContent(), id);
-        });
+        postRepository.save(post);
         return new RedirectView("/posts/detail/"+ id);
     }
 

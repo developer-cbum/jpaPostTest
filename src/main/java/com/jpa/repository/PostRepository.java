@@ -10,7 +10,6 @@ import javax.transaction.Transactional;
 
 public interface PostRepository extends JpaRepository<Post, Long> {
 
-    @Modifying(clearAutomatically = true)
-    @Query("update Post  p set p.postTitle = :content, p.postContent = :title, p.updatedDate = current_timestamp where p.id = :id")
-    public void updatePost(@Param("content") String content, @Param("title")String title, @Param("id")Long id);
+
+
 }
