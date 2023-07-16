@@ -32,29 +32,31 @@
             <div class="content-top">
                 <div>
                     <div class="post-list">게시글 목록</div>
-                    <div class="post-total"><c:out value="${totalPages}개"/></div>
+                    <div class="post-total"><c:out value="${pagination.total}개"/></div>
                 </div>
                 <div class="post-btn-wrap"><button type="button" class="btn btn-primary">게시글 등록</button></div>
             </div>
             <ul class="content-ul"></ul>
             <nav aria-label="Page navigation example">
                 <ul class="pagination">
-                <c:if test="${pagination.prev}">
-                    <li class="page-item"><a class="page-link" href="/posts/list?page=${pagination.startPage-1}"><</a></li>
-                </c:if>
-                <c:forEach var="i" begin="${startPage}" end="${realEndPage}">
-                    <c:choose>
-                        <c:when test="${nowPage == i}">
-                            <li class="page-item active"><a class="page-link"><c:out value="${i}"/></a></li>
-                        </c:when>
-                        <c:otherwise>
-                            <li class="page-item"><a class="page-link" href="/posts/list?page=${i-1}"><c:out value="${i}"/></a></li>
-                        </c:otherwise>
-                    </c:choose>
-                </c:forEach>
-                <c:if test="${pagination.next}">
-                    <li class="page-item"><a class="page-link" href="/posts/list?page=${pagination.endPage+1}">></a></li>
-                </c:if>
+                    <c:if test="${pagination.prev}">
+                        <li class="page-item"><a class="page-link" href="/posts/list?page=${pagination.startPage-1}"><<</a></li>
+                        <li class="page-item"><a class="page-link" href="/posts/list?page=${page-1}"><</a></li>
+                    </c:if>
+                    <c:forEach var="i" begin="${pagination.startPage}" end="${pagination.endPage-1}">
+                        <c:choose>
+                            <c:when test="${i eq pagination.page}">
+                                <li class="page-item active"><a class="page-link"><c:out value="${i+1}"/></a></li>
+                            </c:when>
+                            <c:otherwise>
+                                <li class="page-item"><a class="page-link" href="/posts/list?page=${i}"><c:out value="${i+1}"/></a></li>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:forEach>
+                    <c:if test="${pagination.next}">
+                        <li class="page-item"><a class="page-link" href="/posts/list?page=${page+1}">></a></li>
+                        <li class="page-item"><a class="page-link" href="/posts/list?page=${pagination.endPage}">>></a></li>
+                    </c:if>
                 </ul>
             </nav>
         </div>

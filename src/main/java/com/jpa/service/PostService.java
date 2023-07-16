@@ -8,4 +8,6 @@ public interface PostService {
 
     public Page<Post> getList(Pageable pageable);
 
+    public long getTotal();
+
 }

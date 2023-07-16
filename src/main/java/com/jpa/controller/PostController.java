@@ -74,24 +74,15 @@ public class PostController implements Serializable {
 //    }
 
     @GetMapping("/list")
-    public void goToList(Model model,@PageableDefault(page = 0, size = 10, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
+    public void goToList(Model model,@PageableDefault(page = 0, size = 10, sort = "id", direction = Sort.Direction.DESC) Pageable pageable, Pagination pagination) {
         JSONArray jsonArray= new JSONArray();
-                // Pagination + 기존 page랑 합쳐서 사용
-//        pagination.setRowCount(10);
-//        pagination.setTotal((int)postService.count());
-//        pagination.progress();
-//        PageRequest pageRequest = PageRequest.of(pagination.getPage(), 10, Sort.by(Sort.Direction.DESC, "id"));
-
+//                 Pagination + 기존 page랑 합쳐서 사용
+        pagination.setRowCount(10);
+        pagination.setTotal((int)postService.getTotal());
+        pagination.progress();
 
         Page<Post> posts = postService.getList(pageable);
 
-        log.info(String.valueOf(posts.getSize()));
-
-        posts.getSize();
-        posts.getNumber();
-        posts.getTotalPages();
-        posts.isFirst();
-        posts.isLast();
 
         posts.getContent().forEach(post -> {
             JSONObject jsonObject = new JSONObject();
@@ -104,9 +95,8 @@ public class PostController implements Serializable {
             jsonArray.put(jsonObject);
         });
 
-
         model.addAttribute("posts", jsonArray);
-        model.addAttribute("pagination", posts);
+        model.addAttribute("pagination", pagination);
 
     }
 

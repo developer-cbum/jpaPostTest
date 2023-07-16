@@ -17,4 +17,9 @@ public class PostServiceImpl implements PostService {
     public Page<Post> getList(Pageable pageable) {
         return postRepository.findAllWithPaging(pageable);
     }
+
+    @Override
+    public long getTotal() {
+        return postRepository.count();
+    }
 }
