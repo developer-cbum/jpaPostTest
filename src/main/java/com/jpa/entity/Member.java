@@ -1,5 +1,8 @@
 package com.jpa.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -27,4 +30,6 @@ public class Member {
     @Column(unique = true) @NotNull private String memberEmail;
     @NotNull private String memberPassword;
     @NotNull boolean deleted = Boolean.FALSE;
+
+
 }

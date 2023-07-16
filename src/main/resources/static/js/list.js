@@ -25,7 +25,7 @@ $(document).ready(function () {
                         <div class="content-box">
                             <div class="title">${post.postTitle}</div>
                             <div class="writer-wrap">
-                                <div class="writer">${post.member.memberName}</div><span></span> 
+                                <div class="writer">${post.memberName}</div><span></span> 
                                 <div class="register-time">${elapsedTime(post.createdDate)}</div>
                             </div>
                         </div>

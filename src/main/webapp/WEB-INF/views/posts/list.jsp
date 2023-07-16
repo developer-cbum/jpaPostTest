@@ -17,6 +17,14 @@
     <link rel="icon" href="/images/favicon.ico"/>
 </head>
 <body>
+<%--<c:set var="pageSize" value="${pagination.size}"/>--%>
+<%--<c:set var="nowPage" value="${pagination.number +1}"/>--%>
+<%--<c:set var="totalPages" value="${pagination.totalPages}"/>--%>
+<%--<c:set var="first" value="${pagination.first}"/>--%>
+<%--<c:set var="last" value="${pagination.last}"/>--%>
+<%--<c:set var="endPage" value="${((nowPage-1)/pageSize+1) * pageSize}"/>--%>
+<%--<c:set var="startPage" value="${endPage-pageSize + 1}"/>--%>
+<%--<c:set var="realEndPage" value="${endPage < totalPages ? endPage : totalPages}"/>--%>
 <div class="container">
     <jsp:include page="../header/header.jsp" />
     <section>
@@ -24,7 +32,7 @@
             <div class="content-top">
                 <div>
                     <div class="post-list">게시글 목록</div>
-                    <div class="post-total"><c:out value="${pagination.total}개"/></div>
+                    <div class="post-total"><c:out value="${totalPages}개"/></div>
                 </div>
                 <div class="post-btn-wrap"><button type="button" class="btn btn-primary">게시글 등록</button></div>
             </div>
@@ -34,13 +42,13 @@
                 <c:if test="${pagination.prev}">
                     <li class="page-item"><a class="page-link" href="/posts/list?page=${pagination.startPage-1}"><</a></li>
                 </c:if>
-                <c:forEach var="i" begin="${pagination.startPage}" end="${pagination.endPage}">
+                <c:forEach var="i" begin="${startPage}" end="${realEndPage}">
                     <c:choose>
-                        <c:when test="${i eq pagination.page+1}">
+                        <c:when test="${nowPage == i}">
                             <li class="page-item active"><a class="page-link"><c:out value="${i}"/></a></li>
                         </c:when>
                         <c:otherwise>
-                            <li class="page-item"><a class="page-link" href="/posts/list?page=${i}"><c:out value="${i}"/></a></li>
+                            <li class="page-item"><a class="page-link" href="/posts/list?page=${i-1}"><c:out value="${i}"/></a></li>
                         </c:otherwise>
                     </c:choose>
                 </c:forEach>
@@ -56,9 +64,7 @@
 <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 <script>
     let posts = ${posts};
-
-    let id = [${sessionScope.id}];
-    console.log(id);
+    console.log(posts);
 </script>
 <script src="/js/elapsedTime.js"></script>
 <script src="/js/list.js"></script>

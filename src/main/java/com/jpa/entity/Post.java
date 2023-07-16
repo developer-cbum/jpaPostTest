@@ -1,6 +1,7 @@
 package com.jpa.entity;
 
 import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.jpa.auditing.Period;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -14,14 +15,14 @@ import org.json.JSONPropertyIgnore;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 @Entity
 @Getter @Setter @ToString(exclude = "member")
 @Table(name= "tbl_post")
 @SQLDelete(sql ="update tbl_post set deleted = 1 where id = ?")
 @Where(clause = "deleted = 0")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class)
-public class Post extends Period {
+public class Post extends Period implements Serializable {
     @Id @GeneratedValue
     @EqualsAndHashCode.Include
     private Long id;

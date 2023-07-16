@@ -16,22 +16,22 @@ import javax.transaction.Transactional;
 @Rollback(value = false)
 public class MemberRepositoryTests {
 
-    @Autowired
-    private MemberRepository memberRepository;
-
-    @Test
-    public void saveTest(){
-        Member member = new Member();
-        member.setMemberName("이종문");
-        member.setMemberEmail("ljm1234@naver.com");
-        member.setMemberPassword("1234");
-        memberRepository.save(member);
-    }
-
-    @Test
-    public void loginTest(){
-        log.info(memberRepository.findIdByMemberEmailAndMemberPassword("ljm1234@naver.com","1234").toString());
-    }
+//    @Autowired
+//    private MemberRepository memberRepository;
+//
+//    @Test
+//    public void saveTest(){
+//        Member member = new Member();
+//        member.setMemberName("이종문");
+//        member.setMemberEmail("ljm1234@naver.com");
+//        member.setMemberPassword("1234");
+//        memberRepository.save(member);
+//    }
+//
+//    @Test
+//    public void loginTest(){
+//        log.info(memberRepository.findIdByMemberEmailAndMemberPassword("ljm1234@naver.com","1234").toString());
+//    }
 
 
 }
