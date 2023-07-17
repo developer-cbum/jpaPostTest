@@ -30,7 +30,7 @@ import java.util.*;
 @RequiredArgsConstructor
 @RequestMapping("/posts/*")
 @Slf4j
-public class PostController implements Serializable {
+public class PostController {
 
     private final PostService postService;
 //    private final PostRepository postRepository;

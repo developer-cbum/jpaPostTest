@@ -1,10 +1,9 @@
-package com.jpa.repository.members;
+package com.jpa.repository.files;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class MemberQueryDSLImpl implements MemberQueryDSL {
-
+public class FileQueryDSLImpl implements FileQueryDSL {
     @Autowired
     private JPAQueryFactory query;
 }

@@ -28,10 +28,10 @@
                   <label for="post-title">제목</label>
                   <input type="text" class="form-control" id="post-title" name="postTitle" placeholder="제목을 입력해주세요">
               </div>
-<%--              <div class="input-group mb-3">--%>
-<%--                  <input type="file" class="form-control" id="file" multiple>--%>
-<%--                  <label class="input-group-text" for="file">업로드</label>--%>
-<%--              </div>--%>
+              <div class="input-group mb-3">
+                  <input type="file" class="form-control" id="file" multiple>
+                  <label class="input-group-text" for="file">업로드</label>
+              </div>
               <div class="mb-3">
                   <label for="post-content">내용</label>
                   <textarea class="form-control content-area" id="post-content" name="postContent" placeholder="내용을 입력해주세요"></textarea>

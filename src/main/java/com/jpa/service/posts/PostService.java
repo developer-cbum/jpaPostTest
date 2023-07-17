@@ -1,6 +1,8 @@
 package com.jpa.service.posts;
 
+import com.jpa.domain.FileDTO;
 import com.jpa.domain.PostDTO;
+import com.jpa.entity.File;
 import com.jpa.entity.Post;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -25,6 +27,16 @@ public interface PostService {
                     .postContent(postDTO.getPostTitle())
                     .member(postDTO.getMember())
                     .build();
+    }
+
+    default File toEntity(FileDTO fileDTO){
+        return File.builder().id(fileDTO.getId())
+                .fileName(fileDTO.getFileName())
+                .filePath(fileDTO.getFilePath())
+                .fileUuid(fileDTO.getFileUuid())
+                .fileSize(fileDTO.getFileSize())
+                .build();
+
     }
 
 

@@ -1,14 +1,16 @@
 package com.jpa.domain;
 
+import com.jpa.entity.File;
 import com.jpa.entity.Post;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.stereotype.Component;
 
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
-@Data
+@Getter @Setter @ToString(exclude = "post")
 @NoArgsConstructor
 public class FileDTO {
     private Long id;
@@ -16,5 +18,4 @@ public class FileDTO {
     private String filePath;
     private String fileUuid;
     private String fileSize;
-    private Post post;
 }
