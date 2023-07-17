@@ -1,4 +1,4 @@
-package com.jpa.entity.dto;
+package com.jpa.domain;
 
 import lombok.Data;
 import lombok.RequiredArgsConstructor;

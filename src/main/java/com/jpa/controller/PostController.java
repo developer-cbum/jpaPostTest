@@ -3,7 +3,7 @@ package com.jpa.controller;
 import com.jpa.domain.PostDTO;
 import com.jpa.entity.Member;
 import com.jpa.entity.Post;
-import com.jpa.entity.dto.Pagination;
+import com.jpa.domain.Pagination;
 import com.jpa.repository.members.MemberRepository;
 import com.jpa.service.posts.PostService;
 import lombok.RequiredArgsConstructor;
