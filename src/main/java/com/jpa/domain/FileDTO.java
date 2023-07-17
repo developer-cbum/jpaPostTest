@@ -18,4 +18,5 @@ public class FileDTO {
     private String filePath;
     private String fileUuid;
     private String fileSize;
+    private Post post;
 }

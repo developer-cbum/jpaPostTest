@@ -35,6 +35,7 @@ public interface PostService {
                 .filePath(fileDTO.getFilePath())
                 .fileUuid(fileDTO.getFileUuid())
                 .fileSize(fileDTO.getFileSize())
+                .post(fileDTO.getPost())
                 .build();
 
     }
