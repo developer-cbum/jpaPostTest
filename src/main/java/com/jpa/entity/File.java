@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "tbl_file")
-@Getter @Setter @ToString
+@Getter @Setter @ToString(exclude = "post")
 @SQLDelete(sql ="update tbl_file set deleted = 1 where id = ?")
 @Where(clause = "deleted = 0")
 @NoArgsConstructor

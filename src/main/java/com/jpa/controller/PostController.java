@@ -112,6 +112,7 @@ public class PostController {
     @GetMapping("/detail/{id}")
     public String goToDetail(@PathVariable Long id, Model model){
         Optional<Post> foundPost = postService.findById(id);
+        log.info(foundPost.get().toString());
         foundPost.ifPresent(post -> model.addAttribute("post", post));
         return "/posts/detail";
     }
@@ -125,7 +126,7 @@ public class PostController {
 
     @PostMapping("/modify/{id}")
     public RedirectView modify(@PathVariable Long id, PostDTO postDTO){
-        postService.register(postDTO);
+        postService.modify(postDTO);
         return new RedirectView("/posts/detail/"+ id);
     }
 

@@ -17,9 +17,12 @@ public interface PostService {
 
     public void register(PostDTO postDTO);
 
+    public void modify(PostDTO postDTO);
+
     public Optional<Post> findById(Long id);
 
     public void remove(Long id);
+
 
     default Post toEntity(PostDTO postDTO){
             return Post.builder().id(postDTO.getId())

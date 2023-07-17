@@ -18,7 +18,8 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class PostServiceImpl implements PostService {
+public class
+PostServiceImpl implements PostService {
 
     private final PostRepository postRepository;
     private final FileRepository fileRepository;
@@ -47,10 +48,26 @@ public class PostServiceImpl implements PostService {
         });
     }
 
+    @Transactional
+    @Override
+    public void modify(PostDTO postDTO) {
+        postRepository.save(toEntity(postDTO));
+        Long id = postRepository.save(toEntity(postDTO)).getId();
+        postRepository.findById(id).ifPresent(post -> {
+            for (int i = 0; i < postDTO.getFiles().size(); i++) {
+                postDTO.getFiles().get(i).setPost(post);
+                fileRepository.save(toEntity(postDTO.getFiles().get(i)));
+            }
+        });
+        postDTO.getFileIdsForDelete().forEach(fileRepository::deleteById);
+    }
+
     @Override
     public Optional<Post> findById(Long id) {
         return postRepository.findById(id);
     }
+
+
 
     @Override
     public void remove(Long id) {

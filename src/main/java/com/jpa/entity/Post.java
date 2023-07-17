@@ -13,6 +13,8 @@ import org.json.JSONPropertyIgnore;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter @Setter @ToString(exclude = "member")
@@ -30,6 +32,11 @@ public class Post extends Period implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Member member;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "post")
+    private List<File> files = new ArrayList<>();
+
+
 
     @Builder
     public Post(Long id, String postTitle, String postContent, Member member) {

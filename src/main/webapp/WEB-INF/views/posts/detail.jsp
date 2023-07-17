@@ -36,14 +36,14 @@
             <div class="mb-3">
                 <label for="writer">작성자</label>
                 <div class="form-control" id="writer">
-                    <c:out value="${post.memberName}"/>
+                    <c:out value="${post.member.memberName}"/>
                 </div>
             </div>
-            <c:if test="${fn:length(files) != 0}">
+            <c:if test="${fn:length(post.files) != 0}">
                 <div class="mb-3">
                     <label for="formFile">첨부 파일</label>
                     <div class="form-control" type="file" id="formFile">
-                        <c:forEach items="${files}" var="file">
+                        <c:forEach items="${post.files}" var="file">
                             <div class="file-wrap">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                      class="bi bi-file-earmark-arrow-down" viewBox="0 0 16 16">
@@ -84,6 +84,8 @@
 </body>
 <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 <script>
+    console.log(${post});
+
     $(document).ready(function () {
         const $backToListBtn = $('.back-list');
         $backToListBtn.on("click", $(document), () => {

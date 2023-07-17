@@ -31,9 +31,13 @@ $(document).ready(function () {
     let plusText = "";
     // 파일 인풋
 
+    let deleteBtnFlag= false;
+
 
     
     $fileInput.on("change", function () {
+        //다시 append 활성화
+        deleteBtnFlag= false;
         //동적으로 생긴 파일 목록 태그 모음
         const $plusFileContainer = $('.plus-file-container');
         // 파일 업로드 수정할 때 마다 목록 최신화
@@ -133,6 +137,7 @@ $(document).ready(function () {
 
     // 게시글 등록 및 수정하기 버튼 클릭
     $registerBtn.on("click", function () {
+
         if ($tags.eq(0).val() == '') {
             alert("제목을 입력해주세요.")
             $tags.eq(0).focus();
@@ -157,9 +162,14 @@ $(document).ready(function () {
            if(plusText != "") {$fileInput.trigger("change")};
         }
 
+        console.log(deleteBtnFlag);
 
         // 입력폼에 input hidden 파일정보가 담긴 태그들 붙히기
-        $form.append(text)
+        if(!deleteBtnFlag){
+            console.log(text);
+            $form.append(text)
+            deleteBtnFlag = false;
+        }
         // 게시글 수정 및 등록
         $form.submit();
     })
@@ -173,10 +183,11 @@ $(document).ready(function () {
 //    파일 삭제 버튼
     $fileDeleteBtn.on("click", function () {
         const $thisFileWrap = $(this).closest('.modify-file-wrap')
+        deleteBtnFlag = true;
         //화면 상숨기기
         $thisFileWrap.hide();
         // postDTO에 삭제할 파일을 담아주어 삭제시키기
-        text += `<input type="hidden" name="fileIdsForDelete[${count}]" value="${$thisFileWrap.prop("id")}">`
+        text = `<input type="hidden" name="fileIdsForDelete[${count}]" value="${$thisFileWrap.prop("id")}">`
         $form.append(text)
         ++count;
     });
