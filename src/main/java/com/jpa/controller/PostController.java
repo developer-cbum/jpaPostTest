@@ -4,6 +4,7 @@ import com.jpa.domain.PostDTO;
 import com.jpa.entity.Member;
 import com.jpa.entity.Post;
 import com.jpa.domain.Pagination;
+import com.jpa.exception.NoPostException;
 import com.jpa.repository.members.MemberRepository;
 import com.jpa.service.posts.PostService;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.view.RedirectView;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.Serializable;
 import java.util.*;
@@ -109,20 +111,15 @@ public class PostController {
         return new RedirectView("/posts/list");
     }
 
-    @GetMapping("/detail/{id}")
-    public String goToDetail(@PathVariable Long id, Model model){
-        Optional<Post> foundPost = postService.findById(id);
-        log.info(foundPost.get().toString());
-        foundPost.ifPresent(post -> model.addAttribute("post", post));
-        return "/posts/detail";
+    @GetMapping(value = {"/detail/{id}","/modify/{id}"})
+    public String goToDetail(@PathVariable Long id, Model model, HttpServletRequest httpServletRequest){
+        Post post = postService.findById(id).orElseThrow(() -> {
+            throw new NoPostException("게시글 없음");
+        });
+         model.addAttribute("post", post);
+        return "/posts/" + httpServletRequest.getRequestURI().split("/")[2];
     }
 
-    @GetMapping("/modify/{id}")
-    public String goToModify(@PathVariable Long id, Model model){
-        Optional<Post> foundPost = postService.findById(id);
-        foundPost.ifPresent(post -> model.addAttribute("post", post));
-        return "/posts/modify";
-    }
 
     @PostMapping("/modify/{id}")
     public RedirectView modify(@PathVariable Long id, PostDTO postDTO){

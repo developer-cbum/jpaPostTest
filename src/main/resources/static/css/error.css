@@ -1,0 +1,12 @@
+.all-error-wrap{
+    width: 1080px;
+    margin: 0 auto;
+    height: 100vh;
+}
+
+.error-wrap{
+    top: 300px;
+    position: absolute;
+    text-align: center;
+}
+
