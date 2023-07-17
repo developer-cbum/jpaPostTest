@@ -3,10 +3,7 @@ package com.jpa.entity;
 import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.jpa.auditing.Period;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.annotations.LazyToOne;
 import org.hibernate.annotations.LazyToOneOption;
 import org.hibernate.annotations.SQLDelete;
@@ -22,6 +19,7 @@ import java.io.Serializable;
 @Table(name= "tbl_post")
 @SQLDelete(sql ="update tbl_post set deleted = 1 where id = ?")
 @Where(clause = "deleted = 0")
+@NoArgsConstructor
 public class Post extends Period implements Serializable {
     @Id @GeneratedValue
     @EqualsAndHashCode.Include
@@ -33,4 +31,11 @@ public class Post extends Period implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     private Member member;
 
+    @Builder
+    public Post(Long id, String postTitle, String postContent, Member member) {
+        this.id = id;
+        this.postTitle = postTitle;
+        this.postContent = postContent;
+        this.member = member;
+    }
 }

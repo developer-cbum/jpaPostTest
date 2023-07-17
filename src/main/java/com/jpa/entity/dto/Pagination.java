@@ -1,13 +1,7 @@
 package com.jpa.entity.dto;
 
-import com.jpa.entity.Post;
-import com.jpa.repository.PostRepository;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
-import org.json.JSONArray;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 
 @Data
 @RequiredArgsConstructor

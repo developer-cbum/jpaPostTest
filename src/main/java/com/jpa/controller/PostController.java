@@ -1,23 +1,16 @@
 package com.jpa.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import com.jpa.domain.PostDTO;
 import com.jpa.entity.Member;
 import com.jpa.entity.Post;
 import com.jpa.entity.dto.Pagination;
-import com.jpa.repository.MemberRepository;
-import com.jpa.repository.PostRepository;
-import com.jpa.service.PostService;
+import com.jpa.repository.members.MemberRepository;
+import com.jpa.service.posts.PostService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.tomcat.util.json.JSONParser;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -30,7 +23,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpSession;
-import javax.transaction.Transactional;
 import java.io.Serializable;
 import java.util.*;
 
@@ -102,46 +94,45 @@ public class PostController implements Serializable {
 
 
 
-//    @GetMapping("/write")
-//    public void goToWrite(){;}
-//
-//    @PostMapping("/write")
-//    public RedirectView write(Post post, HttpSession session){
-//        if(session.getAttribute("id") != null){
-//            Optional<Member> foundMember = memberRepository.findById((Long) (session.getAttribute("id")));
-//            if(foundMember.isPresent()){
-//                post.setMember(foundMember.get());
-//            }
-//            postRepository.save(post);
-//        };
-//        return new RedirectView("/posts/list");
-//    }
-//
-//    @GetMapping("/detail/{id}")
-//    public String goToDetail(@PathVariable Long id, Model model){
-//        Optional<Post> foundPost = postRepository.findById(id);
-//        foundPost.ifPresent(post -> model.addAttribute("post", post));
-//        return "/posts/detail";
-//    }
-//    @GetMapping("/modify/{id}")
-//    public String goToModify(@PathVariable Long id, Model model){
-//        Optional<Post> foundPost = postRepository.findById(id);
-//        foundPost.ifPresent(post -> model.addAttribute("post", post));
-//        return "/posts/modify";
-//    }
-//
-//    @Transactional
-//    @PostMapping("/modify/{id}")
-//    public RedirectView modify(@PathVariable Long id, Post post){
-//        postRepository.save(post);
-//        return new RedirectView("/posts/detail/"+ id);
-//    }
-//
-//    @GetMapping("/remove/{id}")
-//    @Transactional
-//    public RedirectView remove(@PathVariable Long id){
-//        postRepository.deleteById(id);
-//        return new RedirectView("/posts/list");
-//    }
+    @GetMapping("/write")
+    public void goToWrite(){;}
+
+    @PostMapping("/write")
+    public RedirectView write(PostDTO postDTO, HttpSession session){
+        if(session.getAttribute("id") != null){
+            Optional<Member> foundMember = memberRepository.findById((Long) (session.getAttribute("id")));
+            if(foundMember.isPresent()){
+                postDTO.setMember(foundMember.get());
+            }
+            postService.register(postDTO);
+        };
+        return new RedirectView("/posts/list");
+    }
+
+    @GetMapping("/detail/{id}")
+    public String goToDetail(@PathVariable Long id, Model model){
+        Optional<Post> foundPost = postService.findById(id);
+        foundPost.ifPresent(post -> model.addAttribute("post", post));
+        return "/posts/detail";
+    }
+
+    @GetMapping("/modify/{id}")
+    public String goToModify(@PathVariable Long id, Model model){
+        Optional<Post> foundPost = postService.findById(id);
+        foundPost.ifPresent(post -> model.addAttribute("post", post));
+        return "/posts/modify";
+    }
+
+    @PostMapping("/modify/{id}")
+    public RedirectView modify(@PathVariable Long id, PostDTO postDTO){
+        postService.register(postDTO);
+        return new RedirectView("/posts/detail/"+ id);
+    }
+
+    @GetMapping("/remove/{id}")
+    public RedirectView remove(@PathVariable Long id){
+        postService.remove(id);
+        return new RedirectView("/posts/list");
+    }
 
 }

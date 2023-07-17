@@ -1,7 +1,6 @@
-package com.jpa.repository;
+package com.jpa.repository.posts;
 
 import com.jpa.entity.Post;
-import com.jpa.entity.QPost;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,4 +27,6 @@ public class PostQueryDSLImpl implements PostQueryDSL {
 
         return new PageImpl<>(posts,pageable,count);
     }
+
+
 }

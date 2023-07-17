@@ -1,8 +1,9 @@
 package com.jpa.controller;
 
+import com.jpa.domain.MemberDTO;
 import com.jpa.entity.Member;
-import com.jpa.repository.MemberRepository;
-import lombok.Getter;
+import com.jpa.repository.members.MemberRepository;
+import com.jpa.service.members.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +20,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @RequestMapping("/members/*")
 public class MemberController {
-    private final MemberRepository memberRepository;
+    private final MemberService memberService;
 
 
     @GetMapping("/login")
@@ -27,7 +28,7 @@ public class MemberController {
 
     @PostMapping("/login")
     public RedirectView login(String memberEmail, String memberPassword, HttpSession session, RedirectAttributes redirectAttributes){
-        Optional<Long> foundId = memberRepository.findIdByMemberEmailAndMemberPassword(memberEmail, memberPassword);
+        Optional<Long> foundId = memberService.login(memberEmail, memberPassword);
 
         if(foundId.isPresent()){
             foundId.ifPresent(aLong -> session.setAttribute("id", aLong));
@@ -43,23 +44,23 @@ public class MemberController {
     public void goToJoin(){;}
 
     @PostMapping
-    public RedirectView join(Member member, RedirectAttributes redirectAttributes){
-        memberRepository.save(member);
+    public RedirectView join(MemberDTO memberDTO, RedirectAttributes redirectAttributes){
+        memberService.join(memberDTO);
         redirectAttributes.addFlashAttribute("join", true);
         return new RedirectView("/members/login");
     }
 
-    @PostMapping("members/checkId")
+    @PostMapping("/checkId")
     @ResponseBody
     public boolean checkId(String memberEmail){
-        Optional<Long> foundId = memberRepository.checkId(memberEmail);
+        Optional<Long> foundId = memberService.checkId(memberEmail);
         if(foundId.isPresent()){
             return false;
         }
         return true;
     }
 
-    @GetMapping("members/logout")
+    @GetMapping("/logout")
     public RedirectView logout(HttpSession session){
         session.invalidate();
         return new RedirectView("/members/login");

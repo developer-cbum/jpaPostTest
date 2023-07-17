@@ -65,7 +65,7 @@
                 </div>
             </div>
             <div class="btn-wrap">
-<%--                <c:if test="${sessionScope.id == post.memberId}">--%>
+                <c:if test="${sessionScope.id == post.member.id}">
                     <div class="post-btn-wrap modify-btn-wrap">
                         <button type="button" class="btn btn-primary modify-btn"
                                 onclick="location.href='/posts/modify/${post.id}'">수정
@@ -76,7 +76,7 @@
                                 onclick="location.href='/posts/remove/${post.id}'">삭제
                         </button>
                     </div>
-<%--                </c:if>--%>
+                </c:if>
             </div>
         </div>
     </section>

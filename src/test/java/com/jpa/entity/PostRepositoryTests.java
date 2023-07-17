@@ -1,19 +1,13 @@
 package com.jpa.entity;
 
-import com.jpa.repository.MemberRepository;
-import com.jpa.repository.PostRepository;
+import com.jpa.repository.members.MemberRepository;
+import com.jpa.repository.posts.PostRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.test.annotation.Rollback;
 
 import javax.transaction.Transactional;
-import java.util.Optional;
 
 @SpringBootTest
 @Slf4j
@@ -28,19 +22,19 @@ public class PostRepositoryTests {
     private MemberRepository memberRepository;
 
 
-    @Test
-    public void saveTest(){
-
-        Member member= memberRepository.findById(1L).get();
-
-        for (int i = 0; i < 100; i++) {
-            Post post = new Post();
-            post.setPostTitle("제목2" +(i+1));
-            post.setPostContent("내용2"+(i+1));
-            post.setMember(member);
-            postRepository.save(post);
-        }
-    }
+//    @Test
+//    public void saveTest(){
+//
+//        Member member= memberRepository.findById(1L).get();
+//
+//        for (int i = 0; i < 100; i++) {
+//            Post post = new Post();
+//            post.setPostTitle("제목2" +(i+1));
+//            post.setPostContent("내용2"+(i+1));
+//            post.setMember(member);
+//            postRepository.save(post);
+//        }
+//    }
 
 //    @Test
 //    public void findMemberAndPostTest(){

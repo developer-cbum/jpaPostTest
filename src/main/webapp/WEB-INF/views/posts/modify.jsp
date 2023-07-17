@@ -25,6 +25,7 @@
         <form id="post-form" action="/posts/modify/${post.id}" method="post">
             <div class="write-wrap">
                 <input type="hidden" name="postId" value="${post.id}">
+                <input type="hidden" name="member.id" value="${sessionScope.id}">
 <%--                <input type="hidden" name="memberId" value="${sessionScope.id}">--%>
                 <div class="mb-3">
                     <label for="post-title">제목</label>
