@@ -1,5 +1,7 @@
 package com.jpa.controller;
 
+import com.jpa.service.files.FileService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
@@ -18,11 +20,15 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.atomic.AtomicReference;
 
 @Controller
 @Slf4j
+@RequiredArgsConstructor
 @RequestMapping("files/*")
 public class FileController {
+
+    private final FileService fileService;
 
     //    파일 업로드
     @PostMapping("upload")
@@ -51,12 +57,18 @@ public class FileController {
 
 //        파일 다운로드
     @GetMapping("download")
-    public ResponseEntity<Resource> download(String fileName) throws UnsupportedEncodingException {
+    public ResponseEntity<Resource> download(Long id) throws UnsupportedEncodingException {
+        AtomicReference<String> fileName = new AtomicReference<>("");
+
+        fileService.findById(id).ifPresent(file -> {
+            fileName.set(file.getFilePath() + "/" + file.getFileUuid() + "_" + file.getFileName());
+        });
+
         // 파일 시스템 기준
         Resource resource = new FileSystemResource("C:/upload/" + fileName);
         // header에 정보를 담아준다.
         HttpHeaders headers = new HttpHeaders();
-        headers.add("Content-Disposition", "attachment;filename=" + new String(fileName.substring(fileName.indexOf("_") + 1).getBytes("UTF-8"), "ISO-8859-1"));
+        headers.add("Content-Disposition", "attachment;filename=" + new String(fileName.get().substring(fileName.get().indexOf("_") + 1).getBytes("UTF-8"), "ISO-8859-1"));
         return new ResponseEntity<>(resource, headers, HttpStatus.OK);
     }
 
