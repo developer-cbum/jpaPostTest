@@ -27,22 +27,22 @@ public class FileRepositoryTests {
     @Autowired
     private PostRepository postRepository;
 
-    @Test
-    public void saveTest(){
-        Member member = memberRepository.findById(1L).get();
-        File file = new File();
-        Post post = new Post();
-        post.setPostContent("야호");
-        post.setPostTitle("옙");
-        post.setMember(member);
-
-        file.setFileName("대충");
-        file.setFilePath("넣어");
-        file.setFileUuid("대충");
-        file.setFileSize(10L);
-        file.setPost(post);
-
-
-
-    }
+//    @Test
+//    public void saveTest(){
+//        Member member = memberRepository.findById(1L).get();
+//        File file = new File();
+//        Post post = new Post();
+//        post.setPostContent("야호");
+//        post.setPostTitle("옙");
+//        post.setMember(member);
+//
+//        file.setFileName("대충");
+//        file.setFilePath("넣어");
+//        file.setFileUuid("대충");
+//        file.setFileSize(10L);
+//        file.setPost(post);
+//
+//
+//
+//    }
 }
