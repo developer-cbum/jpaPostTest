@@ -11,7 +11,7 @@ public interface PostQueryDSL {
 
     public Page<Post> findAllWithPaging(Pageable pageable);
 
-
+    public Post findPostById(Long id);
 
 
 

@@ -23,11 +23,13 @@ public interface PostService {
 
     public void remove(Long id);
 
+    public Optional<Post> findPostById(Long id);
+
 
     default Post toEntity(PostDTO postDTO){
             return Post.builder().id(postDTO.getId())
                     .postTitle(postDTO.getPostTitle())
-                    .postContent(postDTO.getPostTitle())
+                    .postContent(postDTO.getPostContent())
                     .member(postDTO.getMember())
                     .build();
     }

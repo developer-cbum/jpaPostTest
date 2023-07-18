@@ -41,11 +41,13 @@ public class PostController {
     public void goToList(Model model,@PageableDefault(page = 0, size = 10, sort = "id", direction = Sort.Direction.DESC) Pageable pageable, Pagination pagination) {
         JSONArray jsonArray= new JSONArray();
 //                 Pagination + 기존 page랑 합쳐서 사용
-        pagination.setRowCount(10);
-        pagination.setTotal((int)postService.getTotal());
-        pagination.progress();
 
         Page<Post> posts = postService.getList(pageable);
+
+        pagination.setRowCount(10);
+        pagination.setTotal((int)posts.getTotalElements());
+        pagination.progress();
+
         posts.getContent().forEach(post -> {
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("id", post.getId());
@@ -81,7 +83,7 @@ public class PostController {
 
     @GetMapping(value = {"/detail/{id}","/modify/{id}"})
     public String goToDetail(@PathVariable Long id, Model model, HttpServletRequest httpServletRequest){
-        Post post = postService.findById(id).orElseThrow(() -> {
+        Post post = postService.findPostById(id).orElseThrow(() -> {
             throw new NoPostException("게시글 없음");
         });
          model.addAttribute("post", post);

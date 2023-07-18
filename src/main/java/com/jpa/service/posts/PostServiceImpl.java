@@ -3,9 +3,11 @@ package com.jpa.service.posts;
 import com.jpa.domain.FileDTO;
 import com.jpa.domain.PostDTO;
 import com.jpa.entity.File;
+import com.jpa.entity.Member;
 import com.jpa.entity.Post;
 import com.jpa.exception.NoPostException;
 import com.jpa.repository.files.FileRepository;
+import com.jpa.repository.members.MemberRepository;
 import com.jpa.repository.posts.PostRepository;
 import com.jpa.service.files.FileService;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +16,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 import java.util.Optional;
 
@@ -25,6 +28,8 @@ PostServiceImpl implements PostService {
 
     private final PostRepository postRepository;
     private final FileRepository fileRepository;
+    private final MemberRepository memberRepository;
+    private final HttpSession session;
 
     @Override
     public Page<Post> getList(Pageable pageable) {
@@ -53,6 +58,10 @@ PostServiceImpl implements PostService {
     @Transactional
     @Override
     public void modify(PostDTO postDTO) {
+        // setter가 없어 빌더 이용
+        // dto에 직접 member를 넣어준다.
+        Optional<Member> foundMember = memberRepository.findById((Long) session.getAttribute("id"));
+        foundMember.ifPresent(member -> postDTO.setMember(member));
         Long id = postRepository.save(toEntity(postDTO)).getId();
         postRepository.findById(id).ifPresent(post -> {
             for (int i = 0; i < postDTO.getFiles().size(); i++) {
@@ -78,5 +87,10 @@ PostServiceImpl implements PostService {
 
         post.getFiles().stream().map(File::getId).forEach(fileRepository::deleteById);
         postRepository.deleteById(id);
+    }
+
+    @Override
+    public Optional<Post> findPostById(Long id) {
+        return Optional.ofNullable(postRepository.findPostById(id));
     }
 }

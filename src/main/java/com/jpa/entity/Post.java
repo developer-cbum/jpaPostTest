@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Getter @Setter @ToString(exclude = "member")
+@Getter @ToString(exclude = "member")
 @Table(name= "tbl_post")
 @SQLDelete(sql ="update tbl_post set deleted = 1 where id = ?")
 @Where(clause = "deleted = 0")
@@ -30,10 +30,10 @@ public class Post extends Period implements Serializable {
     @NotNull private String postContent;
     @NotNull boolean deleted = Boolean.FALSE;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST})
     private Member member;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "post")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "post", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private List<File> files = new ArrayList<>();
 
 

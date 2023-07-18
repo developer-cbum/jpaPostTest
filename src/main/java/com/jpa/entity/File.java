@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "tbl_file")
-@Getter @Setter @ToString(exclude = "post")
+@Getter @ToString(exclude = "post")
 @SQLDelete(sql ="update tbl_file set deleted = 1 where id = ?")
 @Where(clause = "deleted = 0")
 @NoArgsConstructor
@@ -24,7 +24,7 @@ public class File extends Period {
     @NotNull private Long fileSize;
     @NotNull boolean deleted = Boolean.FALSE;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST})
     private Post post;
 
     @Builder

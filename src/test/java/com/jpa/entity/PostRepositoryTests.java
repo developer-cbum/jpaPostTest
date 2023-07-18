@@ -22,20 +22,20 @@ public class PostRepositoryTests {
     @Autowired
     private MemberRepository memberRepository;
 
-
-    @Test
-    public void saveTest(){
-
-        Member member= memberRepository.findById(1L).get();
-
-        for (int i = 0; i < 100; i++) {
-            Post post = new Post();
-            post.setPostTitle("제목" +(i+1));
-            post.setPostContent("내용"+(i+1));
-            post.setMember(member);
-            postRepository.save(post);
-        }
-    }
+//
+//    @Test
+//    public void saveTest(){
+//
+//        Member member= memberRepository.findById(1L).get();
+//
+//        for (int i = 0; i < 100; i++) {
+//            Post post = new Post();
+//            post.setPostTitle("제목" +(i+1));
+//            post.setPostContent("내용"+(i+1));
+//            post.setMember(member);
+//            postRepository.save(post);
+//        }
+//    }
 
 //    @Test
 //    public void findMemberAndPostTest(){
