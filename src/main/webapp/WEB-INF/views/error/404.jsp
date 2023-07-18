@@ -7,9 +7,10 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>500-error</title>
+    <title>404-error</title>
     <link rel="icon" href="/images/favicon.ico">
     <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/list.css"/>
     <link rel="stylesheet" href="/css/error.css">
 </head>
 <body>
@@ -20,7 +21,7 @@
         </div>
         <div class="error-wrap">
             <div>
-                <a href="/posts/list"><img class="error-item" src="/images/error500.png"/></a>
+                <a href="/posts/list"><img class="error-item" src="/images/error404.png"/></a>
             </div>
         </div>
     </section>

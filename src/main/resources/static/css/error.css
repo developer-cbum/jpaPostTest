@@ -5,8 +5,13 @@
 }
 
 .error-wrap{
-    top: 300px;
+    top: 286px;
     position: absolute;
     text-align: center;
+}
+
+.error-header-wrap{
+    position: absolute;
+    top: 30px;
 }
 

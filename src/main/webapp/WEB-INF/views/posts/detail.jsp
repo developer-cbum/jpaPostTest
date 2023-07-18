@@ -21,7 +21,8 @@
 </head>
 <body>
 <div class="detail-container">
-    <jsp:include page="../header/header.jsp"/>
+<%--    <jsp:include page="../header/header.jsp"/>--%>
+    <%@include file="../header/header.jsp"%>
     <section>
         <div class="detail-wrap">
             <div class="post-btn-wrap">

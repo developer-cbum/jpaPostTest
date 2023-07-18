@@ -10,4 +10,8 @@ public class ErrorController {
 
     @GetMapping("500")
     public void goToError500(){;}
+
+    @GetMapping("404")
+    public void goToError404(){;}
+
 }
