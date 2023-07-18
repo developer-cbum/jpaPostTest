@@ -9,11 +9,8 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;
-import java.util.Optional;
 
 import static com.jpa.entity.QPost.post;
-import static com.jpa.entity.QMember.member;
-
 @Slf4j
 public class PostQueryDSLImpl implements PostQueryDSL {
 
