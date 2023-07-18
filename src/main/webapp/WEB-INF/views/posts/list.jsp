@@ -52,7 +52,7 @@
                             </a>
                         </li>
                         <li class="page-item">
-                            <a class="page-link direction-page-btn" href="/posts/list?page=${page-1}">
+                            <a class="page-link direction-page-btn" href="/posts/list?page=${pagination.page-1}">
                                 <span class="material-symbols-outlined" style="font-size: 13px">arrow_back_ios</span>
                             </a>
                         </li>
@@ -70,7 +70,7 @@
                     </c:forEach>
                     <c:if test="${pagination.next}">
                         <li class="page-item">
-                            <a class="page-link direction-page-btn" href="/posts/list?page=${page+1}">
+                            <a class="page-link direction-page-btn" href="/posts/list?page=${pagination.page+1}">
                                 <span class="material-symbols-outlined" style="font-size: 13px"> arrow_forward_ios</span>
                             </a>
                         </li>
