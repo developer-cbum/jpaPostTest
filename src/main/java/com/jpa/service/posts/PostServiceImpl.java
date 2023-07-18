@@ -39,6 +39,7 @@ PostServiceImpl implements PostService {
     @Transactional
     @Override
     public void register(PostDTO postDTO) {
+        // id를 변수에 담음과 동시에 save 된다.
         Long id = postRepository.save(toEntity(postDTO)).getId();
 
         postRepository.findById(id).ifPresent(post -> {

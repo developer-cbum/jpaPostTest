@@ -3,6 +3,7 @@ package com.jpa.entity;
 import com.jpa.repository.members.MemberRepository;
 import com.jpa.repository.posts.PostRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
@@ -22,19 +23,19 @@ public class PostRepositoryTests {
     private MemberRepository memberRepository;
 
 
-//    @Test
-//    public void saveTest(){
-//
-//        Member member= memberRepository.findById(1L).get();
-//
-//        for (int i = 0; i < 100; i++) {
-//            Post post = new Post();
-//            post.setPostTitle("제목2" +(i+1));
-//            post.setPostContent("내용2"+(i+1));
-//            post.setMember(member);
-//            postRepository.save(post);
-//        }
-//    }
+    @Test
+    public void saveTest(){
+
+        Member member= memberRepository.findById(1L).get();
+
+        for (int i = 0; i < 100; i++) {
+            Post post = new Post();
+            post.setPostTitle("제목" +(i+1));
+            post.setPostContent("내용"+(i+1));
+            post.setMember(member);
+            postRepository.save(post);
+        }
+    }
 
 //    @Test
 //    public void findMemberAndPostTest(){
