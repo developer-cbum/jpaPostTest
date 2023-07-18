@@ -12,10 +12,14 @@
             integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
             crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"/>
     <link rel="stylesheet" href="/css/common.css"/>
     <link rel="stylesheet" href="/css/list.css"/>
     <link rel="icon" href="/images/favicon.ico"/>
@@ -51,9 +55,13 @@
                                 <span class="material-symbols-outlined" style="font-size: 13px;">keyboard_double_arrow_left</span>
                             </a>
                         </li>
+                    </c:if>
+                    <c:if test="${pagination.page != 0}">
                         <li class="page-item">
                             <a class="page-link direction-page-btn" href="/posts/list?page=${pagination.page-1}">
-                                <span class="material-symbols-outlined" style="font-size: 13px">arrow_back_ios</span>
+                                <span class="material-symbols-outlined" style="position: relative;top: -1.5px;font-size: 10px;">
+                                    arrow_back_ios
+                                </span>
                             </a>
                         </li>
                     </c:if>
@@ -68,12 +76,16 @@
                             </c:otherwise>
                         </c:choose>
                     </c:forEach>
-                    <c:if test="${pagination.next}">
+                    <c:if test="${pagination.page != pagination.endPage-1}">
                         <li class="page-item">
                             <a class="page-link direction-page-btn" href="/posts/list?page=${pagination.page+1}">
-                                <span class="material-symbols-outlined" style="font-size: 13px"> arrow_forward_ios</span>
+                                <span class="material-symbols-outlined" style="position: relative;top: -1.5px;font-size: 10px;">
+                                    arrow_forward_ios
+                                </span>
                             </a>
                         </li>
+                    </c:if>
+                    <c:if test="${pagination.next}">
                         <li class="page-item">
                             <a class="page-link" href="/posts/list?page=${pagination.endPage}">
                                 <span class="material-symbols-outlined" style="font-size: 13px;">keyboard_double_arrow_right</span>

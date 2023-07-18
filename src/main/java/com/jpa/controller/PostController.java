@@ -46,8 +46,6 @@ public class PostController {
         pagination.progress();
 
         Page<Post> posts = postService.getList(pageable);
-
-
         posts.getContent().forEach(post -> {
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("id", post.getId());
