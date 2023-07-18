@@ -35,37 +35,7 @@ import java.util.*;
 public class PostController {
 
     private final PostService postService;
-//    private final PostRepository postRepository;
     private final MemberRepository memberRepository;
-
-
-//    @GetMapping("/list")
-//    public void goToList(Model model, Pagination pagination) {
-//        JSONArray jsonArray= new JSONArray();
-//        // Pagination + 기존 page랑 합쳐서 사용
-//        pagination.setRowCount(10);
-//        pagination.setTotal((int)postRepository.count());
-//        pagination.progress();
-//        PageRequest pageRequest = PageRequest.of(pagination.getPage(), 10, Sort.by(Sort.Direction.DESC, "id"));
-//        Page<Post> fountPages = postRepository.findAll(pageRequest);
-//
-//
-//        fountPages.getContent().forEach(post -> {
-//            JSONObject jsonObject = new JSONObject();
-//            jsonObject.put("id", post.getId());
-//            jsonObject.put("postTitle", post.getPostTitle());
-//            jsonObject.put("postContent", post.getPostContent());
-//            jsonObject.put("memberName", post.getMember().getMemberName());
-//            jsonObject.put("createdDate", post.getCreatedDate());
-//            jsonObject.put("memberId", post.getMember().getId()); // 필요한 멤버 정보만 담음
-//            jsonArray.put(jsonObject);
-//        });
-//
-//
-//        model.addAttribute("posts", jsonArray);
-//        model.addAttribute("pagination", pagination);
-//
-//    }
 
     @GetMapping("/list")
     public void goToList(Model model,@PageableDefault(page = 0, size = 10, sort = "id", direction = Sort.Direction.DESC) Pageable pageable, Pagination pagination) {

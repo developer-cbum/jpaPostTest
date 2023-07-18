@@ -31,13 +31,13 @@ $(document).ready(function () {
     let plusText = "";
     // 파일 인풋
 
-    let deleteBtnFlag= false;
+    let deleteText="";
 
 
     
     $fileInput.on("change", function () {
         //다시 append 활성화
-        deleteBtnFlag= false;
+        // deleteBtnFlag= false;
         //동적으로 생긴 파일 목록 태그 모음
         const $plusFileContainer = $('.plus-file-container');
         // 파일 업로드 수정할 때 마다 목록 최신화
@@ -94,7 +94,7 @@ $(document).ready(function () {
                                         </svg>
                                         <a class="p-1 rounded" style="color:#0d6efd; font-size: 14px; cursor: default"
                                            href="">${name[i]}
-                                        </a><span style="font-size: 12px;cursor:default">(${Math.ceil(sizes[i] / 1024).toFixed(2)}KB)</span><br>
+                                        </a><span style="font-size: 12px;cursor:default">(${(sizes[i]/1024).toFixed(2)}KB)</span><br>
                                     </div>
                                     <button type="button" class="btn btn-primary file-delete-btn active-file-delete-btn">삭제</button>
                                 </div>
@@ -162,14 +162,15 @@ $(document).ready(function () {
            if(plusText != "") {$fileInput.trigger("change")};
         }
 
-        console.log(deleteBtnFlag);
-
-        // 입력폼에 input hidden 파일정보가 담긴 태그들 붙히기
-        if(!deleteBtnFlag){
-            console.log(text);
-            $form.append(text)
-            deleteBtnFlag = false;
-        }
+        // console.log(deleteBtnFlag);
+        //
+        // // 입력폼에 input hidden 파일정보가 담긴 태그들 붙히기
+        // if(!deleteBtnFlag){
+        //     console.log(text);
+        //     deleteBtnFlag = false;
+        // }
+        $form.append(text)
+        $form.append(deleteText)
         // 게시글 수정 및 등록
         $form.submit();
     })
@@ -183,12 +184,11 @@ $(document).ready(function () {
 //    파일 삭제 버튼
     $fileDeleteBtn.on("click", function () {
         const $thisFileWrap = $(this).closest('.modify-file-wrap')
-        deleteBtnFlag = true;
         //화면 상숨기기
         $thisFileWrap.hide();
         // postDTO에 삭제할 파일을 담아주어 삭제시키기
-        text = `<input type="hidden" name="fileIdsForDelete[${count}]" value="${$thisFileWrap.prop("id")}">`
-        $form.append(text)
+        deleteText += `<input type="hidden" name="fileIdsForDelete[${count}]" value="${$thisFileWrap.prop("id")}">`
+        $form.append(deleteText)
         ++count;
     });
 

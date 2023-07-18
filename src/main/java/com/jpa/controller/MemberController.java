@@ -24,7 +24,14 @@ public class MemberController {
 
 
     @GetMapping("/login")
-    public void goToLogin(){}
+    public String goToLogin(HttpSession session){
+        // 로그인 되어있으면 바로 메인 화면으로 이동
+        if(session.getAttribute("id") != null){
+            // 포워드 에서 리다이렉트 쓰는 법
+            return "redirect:" + "/posts/list";
+        }
+        return "members/login";
+    }
 
     @PostMapping("/login")
     public RedirectView login(String memberEmail, String memberPassword, HttpSession session, RedirectAttributes redirectAttributes){
