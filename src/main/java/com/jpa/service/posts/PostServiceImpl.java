@@ -2,7 +2,9 @@ package com.jpa.service.posts;
 
 import com.jpa.domain.FileDTO;
 import com.jpa.domain.PostDTO;
+import com.jpa.entity.File;
 import com.jpa.entity.Post;
+import com.jpa.exception.NoPostException;
 import com.jpa.repository.files.FileRepository;
 import com.jpa.repository.posts.PostRepository;
 import com.jpa.service.files.FileService;
@@ -37,7 +39,6 @@ PostServiceImpl implements PostService {
     @Transactional
     @Override
     public void register(PostDTO postDTO) {
-        postRepository.save(toEntity(postDTO));
         Long id = postRepository.save(toEntity(postDTO)).getId();
 
         postRepository.findById(id).ifPresent(post -> {
@@ -51,7 +52,6 @@ PostServiceImpl implements PostService {
     @Transactional
     @Override
     public void modify(PostDTO postDTO) {
-        postRepository.save(toEntity(postDTO));
         Long id = postRepository.save(toEntity(postDTO)).getId();
         postRepository.findById(id).ifPresent(post -> {
             for (int i = 0; i < postDTO.getFiles().size(); i++) {
@@ -71,6 +71,11 @@ PostServiceImpl implements PostService {
 
     @Override
     public void remove(Long id) {
+        Post post = postRepository.findById(id).orElseThrow(() -> {
+            throw new NoPostException("게시물 없음");
+        });
+
+        post.getFiles().stream().map(File::getId).forEach(fileRepository::deleteById);
         postRepository.deleteById(id);
     }
 }

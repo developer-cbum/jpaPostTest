@@ -21,14 +21,14 @@ public class File extends Period {
     @NotNull private String fileName;
     @NotNull private String filePath;
     @NotNull private String fileUuid;
-    @NotNull private String fileSize;
+    @NotNull private Long fileSize;
     @NotNull boolean deleted = Boolean.FALSE;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Post post;
 
     @Builder
-    public File(Long id, String fileName, String filePath, String fileUuid, String fileSize, Post post) {
+    public File(Long id, String fileName, String filePath, String fileUuid, Long fileSize, Post post) {
         this.id = id;
         this.fileName = fileName;
         this.filePath = filePath;

@@ -84,11 +84,9 @@
 </body>
 <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 <script>
-    console.log(${post});
-
     $(document).ready(function () {
         const $backToListBtn = $('.back-list');
-        $backToListBtn.on("click", $(document), () => {
+        $backToListBtn.on("click", () => {
             location.href = "/posts/list"
         })
     });
