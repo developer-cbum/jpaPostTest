@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Getter @ToString(exclude = "member")
+@Getter @Setter @ToString(exclude = "member")
 @Table(name= "tbl_post")
 @SQLDelete(sql ="update tbl_post set deleted = 1 where id = ?")
 @Where(clause = "deleted = 0")
