@@ -76,7 +76,7 @@
                             </c:otherwise>
                         </c:choose>
                     </c:forEach>
-                    <c:if test="${pagination.page != pagination.realEnd-1}">
+                    <c:if test="${pagination.page != pagination.realEnd-1 && pagination.total > 10}">
                         <li class="page-item">
                             <a class="page-link direction-page-btn" href="/posts/list?page=${pagination.page+1}">
                                 <span class="material-symbols-outlined" style="position: relative;top: -1.5px;font-size: 10px;">

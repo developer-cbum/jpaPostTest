@@ -4,13 +4,13 @@ import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.jpa.auditing.Period;
 import lombok.*;
-import org.hibernate.annotations.LazyToOne;
-import org.hibernate.annotations.LazyToOneOption;
-import org.hibernate.annotations.SQLDelete;
-import org.hibernate.annotations.Where;
+import org.hibernate.annotations.*;
 import org.json.JSONPropertyIgnore;
 
 import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -23,11 +23,15 @@ import java.util.List;
 @Where(clause = "deleted = 0")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Post extends Period {
+    @Comment("게시글 고유번호")
     @Id @GeneratedValue
     @EqualsAndHashCode.Include
     private Long id;
+    @Comment("게시글 제목")
     @NotNull private String postTitle;
+    @Comment("게시글 내용")
     @NotNull private String postContent;
+    @Comment("게시글 삭제여부")
     @NotNull boolean deleted = Boolean.FALSE;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST})
