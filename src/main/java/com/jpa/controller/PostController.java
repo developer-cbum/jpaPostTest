@@ -37,6 +37,9 @@ public class PostController {
     private final PostService postService;
     private final MemberRepository memberRepository;
 
+    private final HttpSession session;
+    private final HttpServletRequest servletRequest;
+
     @GetMapping("/list")
     public void goToList(Model model,@PageableDefault(page = 0, size = 10, sort = "id", direction = Sort.Direction.DESC) Pageable pageable, Pagination pagination) {
         JSONArray jsonArray= new JSONArray();
@@ -67,10 +70,17 @@ public class PostController {
 
 
     @GetMapping("/write")
-    public void goToWrite(){;}
+    public String goToWrite(){
+        if(session.getAttribute("id")==null){
+            session.setAttribute("prev", servletRequest.getRequestURI());
+            log.info(servletRequest.getRequestURI());
+            return "redirect:" +"/members/login";
+        }
+        return "/posts/write";
+        }
 
     @PostMapping("/write")
-    public RedirectView write(PostDTO postDTO, HttpSession session){
+    public RedirectView write(PostDTO postDTO){
         if(session.getAttribute("id") != null){
             Optional<Member> foundMember = memberRepository.findById((Long) (session.getAttribute("id")));
             if(foundMember.isPresent()){
@@ -82,12 +92,12 @@ public class PostController {
     }
 
     @GetMapping(value = {"/detail/{id}","/modify/{id}"})
-    public String goToDetail(@PathVariable Long id, Model model, HttpServletRequest httpServletRequest){
+    public String goToDetail(@PathVariable Long id, Model model){
         Post post = postService.findPostById(id).orElseThrow(() -> {
             throw new NoPostException("게시글 없음");
         });
          model.addAttribute("post", post);
-        return "/posts/" + httpServletRequest.getRequestURI().split("/")[2];
+        return "/posts/" + servletRequest.getRequestURI().split("/")[2];
     }
 
 

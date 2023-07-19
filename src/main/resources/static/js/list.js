@@ -10,6 +10,7 @@ $(document).ready(function () {
     registerBtn.on("click", () => {
         if (id.length == 0) {
             alert("로그인 후 이용해주세요");
+            location.href= `/posts/write`;
             return;
         }
         location.href = `/posts/write`
