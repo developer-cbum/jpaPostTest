@@ -34,7 +34,7 @@ $(document).ready(function () {
     let deleteText="";
 
 
-    
+
     $fileInput.on("change", function () {
         //다시 append 활성화
         // deleteBtnFlag= false;
@@ -113,6 +113,8 @@ $(document).ready(function () {
         //수정 시 추가한 파일 목록에 추가해주기
         $filePlusWrap.append(plusText);
 
+        //담긴 파일이 없으면 ajax 호출전 리턴
+        if(files.length == 0){return;}
         // 서버에 파일 저장하면서 db에 insert시켜줄 uuid들 값도 받아오기
         $.ajax({
             url        : "/files/upload",
