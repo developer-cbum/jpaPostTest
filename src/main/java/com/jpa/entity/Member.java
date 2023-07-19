@@ -18,7 +18,7 @@ import java.util.List;
 @Table(name = "tbl_member")
 @SQLDelete(sql ="update tbl_member set deleted = 1 where id = ?")
 @Where(clause = "deleted = 0")
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Member {
     @Id
     @GeneratedValue

@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @Getter @ToString(exclude = "post")
 @SQLDelete(sql ="update tbl_file set deleted = 1 where id = ?")
 @Where(clause = "deleted = 0")
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class File extends Period {
     @Id @GeneratedValue @EqualsAndHashCode.Include
     private Long id;

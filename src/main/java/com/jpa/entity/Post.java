@@ -21,8 +21,8 @@ import java.util.List;
 @Table(name= "tbl_post")
 @SQLDelete(sql ="update tbl_post set deleted = 1 where id = ?")
 @Where(clause = "deleted = 0")
-@NoArgsConstructor
-public class Post extends Period implements Serializable {
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+public class Post extends Period {
     @Id @GeneratedValue
     @EqualsAndHashCode.Include
     private Long id;
