@@ -22,7 +22,7 @@
 <div class="login-wrap">
     <section>
         <div class="logo-wrap">
-            <img src="/images/logo2.png" alt="">
+            <a href="/posts/list"><img src="/images/logo2.png" alt=""></a>
         </div>
         <div class="login-wrap">
             <form action="/members/login" method="post">

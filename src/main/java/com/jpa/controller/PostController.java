@@ -73,7 +73,6 @@ public class PostController {
     public String goToWrite(){
         if(session.getAttribute("id")==null){
             session.setAttribute("prev", servletRequest.getRequestURI());
-            log.info(servletRequest.getRequestURI());
             return "redirect:" +"/members/login";
         }
         return "/posts/write";
