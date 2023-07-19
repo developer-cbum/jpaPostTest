@@ -76,7 +76,7 @@
                             </c:otherwise>
                         </c:choose>
                     </c:forEach>
-                    <c:if test="${pagination.page != pagination.endPage-1}">
+                    <c:if test="${pagination.page != pagination.realEnd-1}">
                         <li class="page-item">
                             <a class="page-link direction-page-btn" href="/posts/list?page=${pagination.page+1}">
                                 <span class="material-symbols-outlined" style="position: relative;top: -1.5px;font-size: 10px;">
@@ -101,6 +101,7 @@
 <script>
     let posts = ${posts};
     let id = [${sessionScope.id}];
+    let page = [${pagination}]
 </script>
 <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 <script src="/js/elapsedTime.js"></script>
