@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.jpa.auditing.Period;
 import lombok.*;
 import org.hibernate.annotations.Comment;
 import org.hibernate.annotations.SQLDelete;
@@ -20,7 +21,7 @@ import java.util.List;
 @SQLDelete(sql ="update tbl_member set deleted = 1 where id = ?")
 @Where(clause = "deleted = 0")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Member {
+public class Member extends Period {
     @Comment("회원 고유번호")
     @Id
     @GeneratedValue
