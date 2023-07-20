@@ -60,15 +60,20 @@ PostServiceImpl implements PostService {
     public void modify(PostDTO postDTO) {
         // setter가 없어 빌더 이용
         // dto에 직접 member를 넣어준다.
-        Optional<Member> foundMember = memberRepository.findById((Long) session.getAttribute("id"));
-        foundMember.ifPresent(member -> postDTO.setMember(member));
-        Long id = postRepository.save(toEntity(postDTO)).getId();
-        postRepository.findById(id).ifPresent(post -> {
+//        Optional<Member> foundMember = memberRepository.findById((Long) session.getAttribute("id"));
+//        foundMember.ifPresent(member -> postDTO.setMember(member));
+        // 제목과 내용만 수정
+        postRepository.update(toEntity(postDTO));
+
+        //수정한 게시글 불러오 파일 추가
+        postRepository.findById(postDTO.getId()).ifPresent(post -> {
             for (int i = 0; i < postDTO.getFiles().size(); i++) {
                 postDTO.getFiles().get(i).setPost(post);
                 fileRepository.save(toEntity(postDTO.getFiles().get(i)));
             }
         });
+
+        // 파일 삭제
         postDTO.getFileIdsForDelete().forEach(fileRepository::deleteById);
     }
 

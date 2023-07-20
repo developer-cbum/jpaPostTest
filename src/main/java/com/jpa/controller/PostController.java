@@ -102,6 +102,7 @@ public class PostController {
 
     @PostMapping("/modify/{id}")
     public RedirectView modify(@PathVariable Long id, PostDTO postDTO){
+        postDTO.setId(id);
         postService.modify(postDTO);
         return new RedirectView("/posts/detail/"+ id);
     }

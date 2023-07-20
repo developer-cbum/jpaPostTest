@@ -13,6 +13,6 @@ public interface PostQueryDSL {
 
     public Post findPostById(Long id);
 
-
+    public void update(Post post);
 
 }

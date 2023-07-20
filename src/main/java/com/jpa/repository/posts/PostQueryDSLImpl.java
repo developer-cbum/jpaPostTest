@@ -1,6 +1,7 @@
 package com.jpa.repository.posts;
 
 import com.jpa.entity.Post;
+import com.jpa.entity.QPost;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,5 +31,13 @@ public class PostQueryDSLImpl implements PostQueryDSL {
     @Override
     public Post findPostById(Long id) {
         return query.select(post).from(post).leftJoin(post.files).fetchJoin().join(post.member).fetchJoin().where(post.id.eq(id)).fetchOne();
+    }
+
+    @Override
+    public void update(Post post) {
+        query.update(QPost.post).set(QPost.post.postTitle, post.getPostTitle())
+                .set(QPost.post.postContent, post.getPostContent())
+                .where(QPost.post.id.eq(post.getId()))
+                .execute();
     }
 }
