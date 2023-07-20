@@ -23,7 +23,6 @@
     <section>
         <form id="post-form" action="/posts/write" method="post">
             <div class="write-wrap">
-                <input type="hidden" name="member.id" value="${sessionScope.id}">
                 <div class="mb-3">
                     <label for="post-title">제목</label>
                     <input type="text" class="form-control" id="post-title" name="postTitle" placeholder="제목을 입력해주세요">
