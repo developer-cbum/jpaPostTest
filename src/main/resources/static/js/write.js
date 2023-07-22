@@ -161,8 +161,10 @@ $(document).ready(function () {
         if(plusFileDeleteCheck){
             plusFileDeleteCheck= false;
             text="";
-           if(plusText != "") {$fileInput.trigger("change")};
+            $fileInput.trigger("change")
         }
+
+        if(plusText != "") {$fileInput.trigger("change")};
 
         // console.log(deleteBtnFlag);
         //
